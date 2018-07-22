@@ -1,0 +1,1 @@
+Basic Javascript app to play Rock, Paper, Scissors as part of the Odin Project
