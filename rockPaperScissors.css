@@ -33,3 +33,11 @@ body{
     position: fixed;
     top: 15%;
 }
+
+#lastGameResult{
+    top: 10%;
+}
+
+#winner{
+    top: 75%;
+}

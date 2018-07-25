@@ -1,24 +1,25 @@
 var lastRoundWinner;
 var playerWinCount = 0;
 var computerWinCount = 0;
+var playerSelection = "";
 
-var rockBtn = document.querySelector('#rock');
-var paperBtn = document.querySelector('#paper');
-var scissorsBtn = document.querySelector('#scissors');
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+const resultsDiv = document.querySelector('#results');
+const lastResultDiv = document.querySelector('#lastGameResult');
+const winnerDiv = document.querySelector('#winner');
 
 rockBtn.addEventListener('click', () => {
-    playerSelection = "ROCK";
-    playRound();
+    playRound("ROCK");
 });
 
 paperBtn.addEventListener('click', () => {
-    playerSelection = "PAPER";
-    playRound();
+    playRound("PAPER");
 });
 
 scissorsBtn.addEventListener('click', () => {
-    playerSelection = "SCISSORS";
-    playRound();
+    playRound("SCISSORS");
 });
 
 function computerPlay(){
@@ -38,24 +39,31 @@ function computerPlay(){
     }
 }
 
-function playRound(playerSelection, computerSelection){
+function playRound(playerSelection){
 
-    computerPlay();
+    var computerSelection = computerPlay();
 
     if(playerSelection == computerSelection){
-        return "It's a tie! You both played " + playerSelection;
-    }
-
-    if((playerSelection == "ROCK" && computerSelection == "SCISSORS") 
+        lastResultDiv.textContent = "It's a tie! You both played " + playerSelection;
+    }else if((playerSelection == "ROCK" && computerSelection == "SCISSORS") 
         || (playerSelection == "PAPER" && computerSelection == "ROCK") 
         | (playerSelection == "SCISSORS" && computerSelection == "PAPER")){
                         
         lastRoundWinner = "PLAYER";
-        return "You Win! " + playerSelection + " beats " + computerSelection;
+        lastResultDiv.textContent = "You Win! " + playerSelection + " beats " + computerSelection;
     }else{
         lastRoundWinner = "COMPUTER";
-        return "You Lose! " + computerSelection + " beats " + playerSelection;
+        lastResultDiv.textContent = "You Lose! " + computerSelection + " beats " + playerSelection;
     }
+
+    reportScore();
+
+    if(playerWinCount == 5
+        || computerWinCount == 5){
+        
+        reportWinner();
+    }
+
 }
 
 function reportScore(){
@@ -64,28 +72,22 @@ function reportScore(){
     }else if(lastRoundWinner == "COMPUTER"){
         computerWinCount += 1;
     }
-    console.log("You: " + playerWinCount + " Computer " + computerWinCount);
+    resultsDiv.textContent = "You: " + playerWinCount + " Computer " + computerWinCount;
 }
 
 function reportWinner(){
     if(playerWinCount > computerWinCount){
-        console.log("CONGRATULATIONS! YOU'VE WON THE GAME!")
+        winnerDiv.textContent = "CONGRATULATIONS! YOU'VE WON THE GAME!";
     }else if (playerWinCount < computerWinCount){
-        console.log("BUMMER! YOU'VE LOST THIS TIME... TRY AGAIN!")
+        winnerDiv.textContent = "BUMMER! YOU'VE LOST THIS TIME... TRY AGAIN!";
     }else{
-        console.log("YOU'VE TIED. TRY AGAIN TO BEST THE COMPUTER!")
+        winnerDiv.textContent = "YOU'VE TIED. TRY AGAIN TO BEST THE COMPUTER!";
     }
+
+    resetGame();
 }
 
-function game(){
-
-        computerSelection = computerPlay();
-                    
-        console.log(playRound(playerSelection, computerSelection));
-        reportScore();
-                
-        reportWinner();
-                
+function resetGame(){
+    playerWinCount = 0;
+    computerWinCount = 0;
 }
-
-game();
