@@ -43,6 +43,10 @@ function playRound(playerSelection){
 
     var computerSelection = computerPlay();
 
+    if(playerWinCount != 5 && computerWinCount !=5){
+        winnerDiv.textContent = "";
+    }
+
     if(playerSelection == computerSelection){
         lastResultDiv.textContent = "It's a tie! You both played " + playerSelection;
     }else if((playerSelection == "ROCK" && computerSelection == "SCISSORS") 
