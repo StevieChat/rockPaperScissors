@@ -12,6 +12,11 @@ body{
     border-radius: 10%;
 }
 
+.btn:hover{
+    font-weight: bold;
+    border: 2px solid white;
+}
+
 .centered{
     position: fixed;
     top: 50%;
