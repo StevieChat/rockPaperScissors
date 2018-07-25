@@ -2,6 +2,25 @@ var lastRoundWinner;
 var playerWinCount = 0;
 var computerWinCount = 0;
 
+var rockBtn = document.querySelector('#rock');
+var paperBtn = document.querySelector('#paper');
+var scissorsBtn = document.querySelector('#scissors');
+
+rockBtn.addEventListener('click', () => {
+    playerSelection = "ROCK";
+    playRound();
+});
+
+paperBtn.addEventListener('click', () => {
+    playerSelection = "PAPER";
+    playRound();
+});
+
+scissorsBtn.addEventListener('click', () => {
+    playerSelection = "SCISSORS";
+    playRound();
+});
+
 function computerPlay(){
     var x = Math.floor((Math.random()*3)+1);
                 
@@ -20,14 +39,8 @@ function computerPlay(){
 }
 
 function playRound(playerSelection, computerSelection){
-    playerSelection = playerSelection.toUpperCase();
 
-    if(playerSelection!="ROCK" 
-        && playerSelection!="PAPER" 
-        && playerSelection!="SCISSORS"){
-
-        return "You must select Rock, Paper, or Scissors to play!"
-    }
+    computerPlay();
 
     if(playerSelection == computerSelection){
         return "It's a tie! You both played " + playerSelection;
